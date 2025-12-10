@@ -1,0 +1,25 @@
+name: CI Pipeline
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Print message & create artifact file
+      run: |
+        echo "CI Running"
+        echo "This is a small artifact created by the workflow" > ci-artifact.txt
+        ls -la
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ci-artifact
+        path: ci-artifact.txt
